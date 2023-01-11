@@ -11,7 +11,6 @@ on:
         default: 'google.com'
 
 
-# Limit workflow to one job per branch.
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
   cancel-in-progress: true
@@ -24,12 +23,6 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - name: 📩 Checkout the source w/ full depth(for tags and SCM)
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-
       - name: 📦 Setup the Environment
         run: |
           mkdir /tmp/artifacts
