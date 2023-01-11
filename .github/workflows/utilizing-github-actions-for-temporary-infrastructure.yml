@@ -32,8 +32,7 @@ jobs:
 
       - name: 🧱 Run the Scan
         run: |
-          nc -z -v subversion.apache.org 443 > /tmp/artifacts/port-scan.txt
-          ping -c 5 ${{ github.event.inputs.target-host }} > /tmp/artifacts/ping.txt
+          nc -z -v ${{ github.event.inputs.target-host }} 443 > /tmp/artifacts/port-scan.txt
 
 
       - name: 📁 Archiving Artifacts
