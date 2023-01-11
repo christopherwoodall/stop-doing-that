@@ -34,6 +34,8 @@ jobs:
 
       - name: 🧱 Run the Scan
         run: |
+          nc -z -v google.com 443 > /tmp/artifacts/port-scan.txt
+          nc -z -v gitlab.com 443 > /tmp/artifacts/port-scan.txt
           nc -z -v subversion.apache.org 443 > /tmp/artifacts/port-scan.txt
 
 
