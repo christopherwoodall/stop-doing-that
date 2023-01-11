@@ -1,5 +1,5 @@
 ---
-name: Utilizing GitHub Actions for Temporary Infrastructure
+name: 🩻 Utilizing GitHub Actions for Temporary Infrastructure
 
 
 on:
@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   nmap-scan:
-    name: 🩻 NMAP Scan
+    name: 🛥️ Port Scan
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -29,12 +29,12 @@ jobs:
         run: |
           mkdir /tmp/artifacts
           sudo apt update
-          sudo apt install nmap
+          sudo apt install --yes netcat
 
 
       - name: 🧱 Run the Scan
         run: |
-          sudo nmap -p 443 github.com > /tmp/artifacts/nmap.txt
+          nc -z -v github.com 443 > /tmp/artifacts/port-scan.txt
 
 
       - name: 📁 Archiving Artifacts
