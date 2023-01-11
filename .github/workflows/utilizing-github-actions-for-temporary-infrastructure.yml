@@ -4,10 +4,11 @@ name: 🩻 Utilizing GitHub Actions for Temporary Infrastructure
 
 on:
   workflow_dispatch:
-    target-host:
-      description: 'The host to ping'
-      required: true
-      default: 'google.com'
+    inputs:
+      target-host:
+        description: 'The host to ping'
+        required: true
+        default: 'google.com'
 
 
 # Limit workflow to one job per branch.
@@ -39,7 +40,7 @@ jobs:
       - name: 🧱 Run the Scan
         run: |
           # nc -z -v subversion.apache.org 443 > /tmp/artifacts/port-scan.txt
-          ping -c 5 ${{ github.event.target-host }} > /tmp/artifacts/ping.txt
+          ping -c 5 ${{ github.event.inputs.target-host }} > /tmp/artifacts/ping.txt
 
 
       - name: 📁 Archiving Artifacts
