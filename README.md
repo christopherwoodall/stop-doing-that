@@ -5,4 +5,4 @@
 
 ## Contents
 1. Utilizing GitHub Actions for temporary infrastructure. [Link](./.github/workflows/utilizing-github-actions-for-temporary-infrastructure.yml)
-[](./docs/assets/github-action-port-scan.gif)
+![Demo Animation](./docs/assets/github-action-port-scan.gif)
