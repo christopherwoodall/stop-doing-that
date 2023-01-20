@@ -9,6 +9,10 @@ on:
         description: 'The host to ping'
         required: true
         default: 'google.com'
+      target-port:
+        description: 'The port to scan'
+        required: true
+        default: '443'
 
 
 concurrency:
@@ -32,7 +36,7 @@ jobs:
 
       - name: 🧱 Run the Scan
         run: |
-          nc -z -v ${{ github.event.inputs.target-host }} 443 > /tmp/artifacts/port-scan.txt
+          nc -z -v ${{ github.event.inputs.target-host }} ${{ github.event.inputs.target-port }} > /tmp/artifacts/port-scan.txt
 
 
       - name: 📁 Archiving Artifacts
