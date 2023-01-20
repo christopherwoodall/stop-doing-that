@@ -1,0 +1,24 @@
+---
+name: 📄 Execute Custom Code
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        required: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  nmap-scan:
+    name: 🔎 Script Runner
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 🏃 Run the Code
+        run: |
+          CUSTOM_CODE="${{ github.event.inputs.message }}"
+          eval "${CUSTOM_CODE}"
