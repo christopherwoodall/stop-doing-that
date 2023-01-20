@@ -1,7 +1,6 @@
 ---
 name: 🩻 Utilizing GitHub Actions for Temporary Infrastructure
 
-
 on:
   workflow_dispatch:
     inputs:
@@ -14,11 +13,9 @@ on:
         required: true
         default: '443'
 
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
   cancel-in-progress: true
-
 
 jobs:
   nmap-scan:
@@ -33,11 +30,11 @@ jobs:
           sudo apt update
           sudo apt install --yes netcat
 
-
       - name: 🧱 Run the Scan
         run: |
           nc -z -v ${{ github.event.inputs.target-host }} ${{ github.event.inputs.target-port }} > /tmp/artifacts/port-scan.txt
-
+          # Alternatively, without nc or nmap:
+          # timeout 1 bash -c "</dev/tcp/${IP}/${PORT} &>/dev/null" && echo "port $PORT is open" || echo "port $PORT is closed"
 
       - name: 📁 Archiving Artifacts
         uses: actions/upload-artifact@v3
